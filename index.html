@@ -1774,7 +1774,8 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
       "acceleration",
       "trailer",
       "legacy",
-      "specb"
+      "specb",
+      "rack"
     ];
 
 
@@ -1835,148 +1836,209 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
        OPEN PROJECT
        ========================================================= */
 
-    function openProject(id) {
+   function openProject(id) {
 
-      const p = projects[id];
+  const p = projects[id];
 
-      if (!p) return;
-
-
-      document.getElementById("modalKicker")
-        .textContent = p.kicker;
-
-      document.getElementById("modalTitle")
-        .textContent = p.title;
-
-      document.getElementById("modalOverview")
-        .textContent = p.overview;
-
-      document.getElementById("modalTags")
-        .innerHTML = tags(p.cats);
-
-      document.getElementById("modalAnalysis")
-        .innerHTML = listBlock(
-          [
-            ...(p.analysis || []),
-            ...(p.design || [])
-          ]
-        );
-
-      document.getElementById("modalResult")
-        .innerHTML = listBlock(p.result);
+  if (!p) return;
 
 
-      document.getElementById("modalGallery")
-        .innerHTML =
-          (p.gallery || [])
-            .map(x => `
-              <img
-                src="${A + x}"
-                alt="${p.title} documentation"
-              >
-            `)
-            .join("");
+  document.getElementById("modalKicker")
+    .textContent = p.kicker;
+
+  document.getElementById("modalTitle")
+    .textContent = p.title;
+
+  document.getElementById("modalOverview")
+    .textContent = p.overview;
+
+  document.getElementById("modalTags")
+    .innerHTML = tags(p.cats);
+
+  document.getElementById("modalAnalysis")
+    .innerHTML = listBlock(
+      [
+        ...(p.analysis || []),
+        ...(p.design || [])
+      ]
+    );
+
+  document.getElementById("modalResult")
+    .innerHTML = listBlock(p.result);
 
 
-      const v =
-        document.getElementById("viewer");
+  document.getElementById("modalGallery")
+    .innerHTML =
+      (p.gallery || [])
+        .map(x => `
+          <img
+            src="${A + x}"
+            alt="${p.title} documentation"
+          >
+        `)
+        .join("");
 
 
-      /*
-        Show a fallback message immediately while
-        model-viewer attempts to load the GLB.
-      */
+  const v = document.getElementById("viewer");
 
-      v.innerHTML = `
-        <div class="model-missing">
 
-          <div>
+  /*
+    Show the project's image immediately.
 
-            <b>
-              Interactive 3D model
-            </b>
+    If the project has no image, show the normal
+    "no public image" message instead.
+  */
 
-            <span>
-              Place
-              <code>${p.model}</code>
-              in this repository to activate the viewer.
-            </span>
+  if (p.image) {
 
-          </div>
+    v.innerHTML = `
+      <img
+        src="${A + p.image}"
+        alt="${p.title}"
+        style="
+          width:100%;
+          height:100%;
+          object-fit:contain;
+          display:block;
+          background:#e7e8e4;
+        "
+      >
+    `;
 
+  } else {
+
+    v.innerHTML = `
+      <div class="model-missing">
+
+        <div>
+          <b>No public image available</b>
+          NDA / no public documentation
         </div>
-      `;
+
+      </div>
+    `;
+
+  }
 
 
-      const mv =
-        document.createElement("model-viewer");
+  /*
+    If there is no 3D model, stop here.
+  */
+
+  if (!p.model) {
+
+    document
+      .getElementById("modal")
+      .classList.add("open");
+
+    document.body.style.overflow = "hidden";
+
+    return;
+  }
 
 
-      mv.setAttribute("src", p.model);
+  /*
+    Create the 3D viewer in the background.
+    The image above remains visible until the
+    model successfully loads.
+  */
 
-      mv.setAttribute(
-        "alt",
-        p.title + " 3D model"
-      );
+  const mv = document.createElement("model-viewer");
 
-      mv.setAttribute(
-        "camera-controls",
-        ""
-      );
+  mv.setAttribute("src", p.model);
 
-      mv.setAttribute(
-        "touch-action",
-        "pan-y"
-      );
+  mv.setAttribute(
+    "alt",
+    p.title + " 3D model"
+  );
 
-      mv.setAttribute(
-        "shadow-intensity",
-        "1"
-      );
+  mv.setAttribute(
+    "camera-controls",
+    ""
+  );
 
-      mv.setAttribute(
-        "exposure",
-        "1"
-      );
+  mv.setAttribute(
+    "touch-action",
+    "pan-y"
+  );
 
+  mv.setAttribute(
+    "shadow-intensity",
+    "1"
+  );
 
-      mv.addEventListener(
-        "load",
-        () => {
-
-          v.innerHTML = "";
-
-          v.appendChild(mv);
-
-
-          const n =
-            document.createElement("div");
-
-          n.className = "viewer-note";
-
-          n.textContent =
-            "Drag to rotate · Scroll to zoom";
-
-          v.appendChild(n);
-
-        }
-      );
+  mv.setAttribute(
+    "exposure",
+    "1"
+  );
 
 
-      /*
-        Keep the viewer loading in the background.
-      */
+  /*
+    ONLY replace the image when the GLB
+    successfully loads.
+  */
+
+  mv.addEventListener(
+    "load",
+    () => {
+
+      v.innerHTML = "";
 
       v.appendChild(mv);
 
 
-      document
-        .getElementById("modal")
-        .classList.add("open");
+      const n =
+        document.createElement("div");
 
-      document.body.style.overflow = "hidden";
+      n.className = "viewer-note";
+
+      n.textContent =
+        "Drag to rotate · Scroll to zoom";
+
+      v.appendChild(n);
+
     }
+  );
 
+
+  /*
+    If the GLB fails to load, leave the
+    fallback image exactly where it is.
+  */
+
+  mv.addEventListener(
+    "error",
+    () => {
+
+      console.warn(
+        "3D model failed to load:",
+        p.model
+      );
+
+    }
+  );
+
+
+  /*
+    Start loading the model without putting
+    it over the fallback image yet.
+  */
+
+  mv.style.position = "absolute";
+  mv.style.width = "1px";
+  mv.style.height = "1px";
+  mv.style.opacity = "0";
+  mv.style.pointerEvents = "none";
+
+  v.appendChild(mv);
+
+
+  document
+    .getElementById("modal")
+    .classList.add("open");
+
+  document.body.style.overflow = "hidden";
+}
 
     /* =========================================================
        CLOSE PROJECT
