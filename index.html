@@ -1836,7 +1836,8 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
        OPEN PROJECT
        ========================================================= */
 
-   function openProject(id) {
+
+function openProject(id) {
 
   const p = projects[id];
 
@@ -1883,155 +1884,236 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
 
 
   /*
-    Show the project's image immediately.
+    Clear the viewer.
+  */
 
-    If the project has no image, show the normal
-    "no public image" message instead.
+  v.innerHTML = "";
+
+  v.style.position = "relative";
+
+
+  /*
+    Create the fallback image.
   */
 
   if (p.image) {
 
-    v.innerHTML = `
-      <img
-        src="${A + p.image}"
-        alt="${p.title}"
-        style="
-          width:100%;
-          height:100%;
-          object-fit:contain;
-          display:block;
-          background:#e7e8e4;
-        "
-      >
+    const fallback = document.createElement("img");
+
+    fallback.src = A + p.image;
+
+    fallback.alt = p.title;
+
+    fallback.style.cssText = `
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #e7e8e4;
+      z-index: 1;
     `;
 
-  } else {
-
-    v.innerHTML = `
-      <div class="model-missing">
-
-        <div>
-          <b>No public image available</b>
-          NDA / no public documentation
-        </div>
-
-      </div>
-    `;
-
-  }
+    v.appendChild(fallback);
 
 
-  /*
-    If there is no 3D model, stop here.
-  */
+    /*
+      If there is a model, create the model viewer
+      on top of the image.
+    */
 
-  if (!p.model) {
+    if (p.model) {
 
-    document
-      .getElementById("modal")
-      .classList.add("open");
+      const mv = document.createElement("model-viewer");
 
-    document.body.style.overflow = "hidden";
+      mv.setAttribute("src", p.model);
 
-    return;
-  }
+      mv.setAttribute(
+        "alt",
+        p.title + " 3D model"
+      );
 
+      mv.setAttribute(
+        "camera-controls",
+        ""
+      );
 
-  /*
-    Create the 3D viewer in the background.
-    The image above remains visible until the
-    model successfully loads.
-  */
+      mv.setAttribute(
+        "touch-action",
+        "pan-y"
+      );
 
-  const mv = document.createElement("model-viewer");
+      mv.setAttribute(
+        "shadow-intensity",
+        "1"
+      );
 
-  mv.setAttribute("src", p.model);
+      mv.setAttribute(
+        "exposure",
+        "1"
+      );
 
-  mv.setAttribute(
-    "alt",
-    p.title + " 3D model"
-  );
-
-  mv.setAttribute(
-    "camera-controls",
-    ""
-  );
-
-  mv.setAttribute(
-    "touch-action",
-    "pan-y"
-  );
-
-  mv.setAttribute(
-    "shadow-intensity",
-    "1"
-  );
-
-  mv.setAttribute(
-    "exposure",
-    "1"
-  );
+      mv.style.cssText = `
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background: transparent;
+      `;
 
 
-  /*
-    ONLY replace the image when the GLB
-    successfully loads.
-  */
+      /*
+        Don't show the model until it has
+        successfully loaded.
+      */
 
-  mv.addEventListener(
-    "load",
-    () => {
+      mv.style.visibility = "hidden";
 
-      v.innerHTML = "";
+
+      mv.addEventListener(
+        "load",
+        () => {
+
+          fallback.style.display = "none";
+
+          mv.style.visibility = "visible";
+
+
+          const n =
+            document.createElement("div");
+
+          n.className = "viewer-note";
+
+          n.textContent =
+            "Drag to rotate · Scroll to zoom";
+
+          v.appendChild(n);
+
+        }
+      );
+
+
+      /*
+        If the GLB fails, the fallback image
+        simply remains visible.
+      */
+
+      mv.addEventListener(
+        "error",
+        () => {
+
+          console.warn(
+            "Could not load 3D model:",
+            p.model
+          );
+
+          mv.remove();
+
+        }
+      );
+
 
       v.appendChild(mv);
 
-
-      const n =
-        document.createElement("div");
-
-      n.className = "viewer-note";
-
-      n.textContent =
-        "Drag to rotate · Scroll to zoom";
-
-      v.appendChild(n);
-
     }
-  );
 
+  } else {
 
-  /*
-    If the GLB fails to load, leave the
-    fallback image exactly where it is.
-  */
+    /*
+      No image exists.
+    */
 
-  mv.addEventListener(
-    "error",
-    () => {
+    if (p.model) {
 
-      console.warn(
-        "3D model failed to load:",
-        p.model
+      const mv = document.createElement("model-viewer");
+
+      mv.setAttribute("src", p.model);
+
+      mv.setAttribute(
+        "alt",
+        p.title + " 3D model"
       );
 
+      mv.setAttribute(
+        "camera-controls",
+        ""
+      );
+
+      mv.setAttribute(
+        "touch-action",
+        "pan-y"
+      );
+
+      mv.setAttribute(
+        "shadow-intensity",
+        "1"
+      );
+
+      mv.setAttribute(
+        "exposure",
+        "1"
+      );
+
+      mv.style.cssText = `
+        width: 100%;
+        height: 100%;
+      `;
+
+      mv.addEventListener(
+        "load",
+        () => {
+
+          const n =
+            document.createElement("div");
+
+          n.className = "viewer-note";
+
+          n.textContent =
+            "Drag to rotate · Scroll to zoom";
+
+          v.appendChild(n);
+
+        }
+      );
+
+      mv.addEventListener(
+        "error",
+        () => {
+
+          v.innerHTML = `
+            <div class="model-missing">
+              <div>
+                <b>3D model unavailable</b>
+                No public image or working 3D model is available.
+              </div>
+            </div>
+          `;
+
+        }
+      );
+
+      v.appendChild(mv);
+
+    } else {
+
+      v.innerHTML = `
+        <div class="model-missing">
+          <div>
+            <b>No public image available</b>
+            NDA / no public documentation
+          </div>
+        </div>
+      `;
+
     }
-  );
+
+  }
 
 
   /*
-    Start loading the model without putting
-    it over the fallback image yet.
+    Open modal.
   */
-
-  mv.style.position = "absolute";
-  mv.style.width = "1px";
-  mv.style.height = "1px";
-  mv.style.opacity = "0";
-  mv.style.pointerEvents = "none";
-
-  v.appendChild(mv);
-
 
   document
     .getElementById("modal")
@@ -2039,6 +2121,7 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
 
   document.body.style.overflow = "hidden";
 }
+
 
     /* =========================================================
        CLOSE PROJECT
