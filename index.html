@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 
 <html lang="en">
@@ -7,11 +8,10 @@
 
   <title>Logan Connelly — Engineering Portfolio</title>
 
-<meta
-name="description"
-content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, manufacturing, and vehicle projects."
-
->
+  <meta
+    name="description"
+    content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, manufacturing, and vehicle projects."
+  >
 
   <script
     type="module"
@@ -69,10 +69,6 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
       font: inherit;
     }
 
-    /* =========================================================
-       GLOBAL CONTAINER
-       ========================================================= */
-
     .wrap {
       width: min(calc(100% - 68px), var(--max));
       margin-left: auto;
@@ -83,21 +79,13 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
        NAVIGATION
        ========================================================= */
 
-    /*
-      IMPORTANT:
-      The nav is now positioned OVER the hero rather than being
-      its own white block.
-    */
-
     .nav {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       z-index: 20;
-
       height: 82px;
-
       color: #ffffff;
 
       background: linear-gradient(
@@ -127,19 +115,15 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
 
     .brand span {
       margin-left: 10px;
-
       color: rgba(255, 255, 255, 0.68);
-
       font-size: 11px;
       font-weight: 400;
-
       letter-spacing: 0.18em;
     }
 
     .navlinks {
       display: flex;
       gap: 34px;
-
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -161,13 +145,6 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
     /* =========================================================
        HERO
        ========================================================= */
-
-    /*
-      The hero deliberately DOES NOT have .wrap.
-
-      This is what makes the background image span the entire
-      viewport instead of being constrained to 1240px.
-    */
 
     .hero {
       position: relative;
@@ -218,7 +195,6 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
 
       mix-blend-mode: screen;
     }
-
 
     .hero-content {
       position: relative;
@@ -433,6 +409,8 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
       overflow: hidden;
 
       background: #e7e8e4;
+
+      border-radius: 16px;
     }
 
     .project.featured .project-media {
@@ -444,12 +422,16 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
       height: 100%;
 
       object-fit: cover;
+
+      border-radius: 16px;
     }
 
     .project-media.contain img {
       object-fit: contain;
 
       padding: 30px;
+
+      border-radius: 16px;
     }
 
     .project-body {
@@ -853,7 +835,9 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
 
       background: #f0f0ec;
 
-      border-radius: 12px;
+      border-radius: 16px;
+
+      overflow: hidden;
     }
 
     /* =========================================================
@@ -1001,146 +985,127 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
 
 <body>
 
-  <!-- =========================================================
-       NAVIGATION
-       ========================================================= -->
+  <!-- NAVIGATION -->
 
   <header class="nav">
     <div class="wrap nav-inner">
 
-  <a class="brand" href="#top">
-    LOGAN CONNELLY
-    <span>/ ENGINEERING PORTFOLIO</span>
-  </a>
+      <a class="brand" href="#top">
+        LOGAN CONNELLY
+        <span>/ ENGINEERING PORTFOLIO</span>
+      </a>
 
-</div>
-
+    </div>
   </header>
 
   <main id="top">
 
-<!-- =======================================================
-     HERO
+    <!-- HERO -->
 
-     NOTE:
-     There is intentionally NO "wrap" class here.
-     This allows the photograph to span the entire screen.
-     ======================================================= -->
+    <section class="hero">
 
-<section class="hero">
+      <div class="hero-content">
 
-  <div class="hero-content">
+        <div class="hero-copy">
 
+          <h1>
+            Logan Connelly's<br>
+            Engineering Portfolio
+          </h1>
 
+        </div>
 
-    <div class="hero-copy">
+        <br>
+        <br>
 
-      <h1>
-        Logan Connelly's<br>
-        Engineering Portfolio
-      </h1>
+        <div class="eyebrow">
+          · Prev @ SpaceX<br>
+          · Composites Subsystem Lead @ 49ers Racing<br>
+          · Prev @ Hunter Engineering Co.<br>
+          · Ex-PL @ Illini Electric Motorsports
+        </div>
 
-
-
-    </div>
-    <br>
-    <br>
-    <div class="eyebrow">
-      · Prev @ SpaceX<br>
-      · Composites Subsystem Lead @ 49ers Racing<br>
-      · Prev @ Hunter Engineering Co.<br>
-      · Ex-PL @ Illini Electric Motorsports
-
-    </div>
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     PROJECTS
-     ======================================================= -->
-
-<section class="section" id="projects">
-
-  <div class="wrap">
-
-    <div class="section-head">
-
-      <div>
-        <h2>
-          Engineering Projects
-        </h2>
       </div>
 
-    </div>
+    </section>
 
+    <!-- PROJECTS -->
 
-    <div class="filterbar">
+    <section class="section" id="projects">
 
-      <button class="filter active" data-filter="all">
-        All
-      </button>
+      <div class="wrap">
 
-      <button class="filter" data-filter="3dm">
-        With 3D Model
-      </button>
+        <div class="section-head">
 
-      <button class="filter" data-filter="SpaceX">
-        SpaceX
-      </button>
+          <div>
+            <h2>
+              Engineering Projects
+            </h2>
+          </div>
 
-      <button class="filter" data-filter="FSAE">
-        Formula SAE
-      </button>
+        </div>
 
-      <button class="filter" data-filter="software">
-        Analysis / Software
-      </button>
+        <div class="filterbar">
 
-      <button class="filter" data-filter="26">
-        2026 Projects
-      </button>
-      
-      <button class="filter" data-filter="25">
-        2025 Projects
-      </button>
-      
-      <button class="filter" data-filter="24">
-        2024 Projects
-      </button>
-    </div>
+          <button class="filter active" data-filter="all">
+            All
+          </button>
 
+          <button class="filter" data-filter="3dm">
+            With 3D Model
+          </button>
 
-    <div class="project-grid" id="projectGrid"></div>
+          <button class="filter" data-filter="SpaceX">
+            SpaceX
+          </button>
 
-  </div>
+          <button class="filter" data-filter="FSAE">
+            Formula SAE
+          </button>
 
-</section>
+          <button class="filter" data-filter="software">
+            Analysis / Software
+          </button>
 
+          <button class="filter" data-filter="26">
+            2026 Projects
+          </button>
 
+          <button class="filter" data-filter="25">
+            2025 Projects
+          </button>
 
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
+          <button class="filter" data-filter="24">
+            2024 Projects
+          </button>
+
+        </div>
+
+        <div class="project-grid" id="projectGrid"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
 
   <footer class="wrap">
 
-<div>
-  <strong>Logan Connelly</strong>
-  <br>
-  Engineering Portfolio
-</div>
+    <div>
+      <strong>Logan Connelly</strong>
+      <br>
+      Engineering Portfolio
+    </div>
 
-<div>
-  Built as a static GitHub Pages site · 2026
-</div>
+    <div>
+      Built as a static GitHub Pages site · 2026
+    </div>
 
   </footer>
 
-  <!-- =========================================================
-       PROJECT MODAL
-       ========================================================= -->
+  <!-- PROJECT MODAL -->
 
   <div
     class="modal"
@@ -1148,106 +1113,97 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
     onclick="if(event.target===this)closeProject()"
   >
 
-<div class="modal-card">
+    <div class="modal-card">
 
-  <div class="modal-top">
+      <div class="modal-top">
 
-    <div>
+        <div>
 
-      <div
-        class="eyebrow"
-        id="modalKicker">
-      </div>
+          <div
+            class="eyebrow"
+            id="modalKicker">
+          </div>
 
-      <h2 id="modalTitle"></h2>
+          <h2 id="modalTitle"></h2>
 
-    </div>
+        </div>
 
-    <button
-      class="close"
-      onclick="closeProject()"
-      aria-label="Close"
-    >
-      ×
-    </button>
-
-  </div>
-
-
-  <div class="modal-content">
-
-    <div
-      class="viewer"
-      id="viewer">
-    </div>
-
-
-    <div class="detail-grid">
-
-      <div class="detail">
-
-        <h4>
-          Overview
-        </h4>
-
-        <p id="modalOverview"></p>
+        <button
+          class="close"
+          onclick="closeProject()"
+          aria-label="Close"
+        >
+          ×
+        </button>
 
       </div>
 
-
-      <div class="detail">
-
-        <h4>
-          Tags
-        </h4>
+      <div class="modal-content">
 
         <div
-          class="tags"
-          id="modalTags">
+          class="viewer"
+          id="viewer">
+        </div>
+
+        <div class="detail-grid">
+
+          <div class="detail">
+
+            <h4>
+              Overview
+            </h4>
+
+            <p id="modalOverview"></p>
+
+          </div>
+
+          <div class="detail">
+
+            <h4>
+              Tags
+            </h4>
+
+            <div
+              class="tags"
+              id="modalTags">
+            </div>
+
+          </div>
+
+          <div class="detail">
+
+            <h4>
+              Analysis / Design
+            </h4>
+
+            <div id="modalAnalysis"></div>
+
+          </div>
+
+          <div class="detail">
+
+            <h4>
+              Result / Retrospective
+            </h4>
+
+            <div id="modalResult"></div>
+
+          </div>
+
+        </div>
+
+        <div
+          class="gallery"
+          id="modalGallery">
         </div>
 
       </div>
 
-
-      <div class="detail">
-
-        <h4>
-          Analysis / Design
-        </h4>
-
-        <div id="modalAnalysis"></div>
-
-      </div>
-
-
-      <div class="detail">
-
-        <h4>
-          Result / Retrospective
-        </h4>
-
-        <div id="modalResult"></div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="gallery"
-      id="modalGallery">
     </div>
 
   </div>
 
-</div>
-```
-
-  </div>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
+  <!-- JAVASCRIPT -->
 
   <script>
 
@@ -1378,7 +1334,7 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
         gallery: [
           "monocad.png"
         ],
-        model: "monocoque.GLB",
+        model: "monocoque.glb",
 
         overview:
           "Preliminary design of a half-monocoque to prove the feasibility of switching to a half-monocoque chassis for the 2027 season.",
@@ -1843,291 +1799,262 @@ content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, m
        OPEN PROJECT
        ========================================================= */
 
+    function openProject(id) {
 
-function openProject(id) {
+      const p = projects[id];
 
-  const p = projects[id];
-
-  if (!p) return;
-
-
-  document.getElementById("modalKicker")
-    .textContent = p.kicker;
-
-  document.getElementById("modalTitle")
-    .textContent = p.title;
-
-  document.getElementById("modalOverview")
-    .textContent = p.overview;
-
-  document.getElementById("modalTags")
-    .innerHTML = tags(p.cats);
-
-  document.getElementById("modalAnalysis")
-    .innerHTML = listBlock(
-      [
-        ...(p.analysis || []),
-        ...(p.design || [])
-      ]
-    );
-
-  document.getElementById("modalResult")
-    .innerHTML = listBlock(p.result);
+      if (!p) return;
 
 
-  document.getElementById("modalGallery")
-    .innerHTML =
-      (p.gallery || [])
-        .map(x => `
-          <img
-            src="${A + x}"
-            alt="${p.title} documentation"
-          >
-        `)
-        .join("");
+      document.getElementById("modalKicker")
+        .textContent = p.kicker;
+
+      document.getElementById("modalTitle")
+        .textContent = p.title;
+
+      document.getElementById("modalOverview")
+        .textContent = p.overview;
+
+      document.getElementById("modalTags")
+        .innerHTML = tags(p.cats);
+
+      document.getElementById("modalAnalysis")
+        .innerHTML = listBlock(
+          [
+            ...(p.analysis || []),
+            ...(p.design || [])
+          ]
+        );
+
+      document.getElementById("modalResult")
+        .innerHTML = listBlock(p.result);
 
 
-  const v = document.getElementById("viewer");
+      document.getElementById("modalGallery")
+        .innerHTML =
+          (p.gallery || [])
+            .map(x => `
+              <img
+                src="${A + x}"
+                alt="${p.title} documentation"
+              >
+            `)
+            .join("");
 
 
-  /*
-    Clear the viewer.
-  */
-
-  v.innerHTML = "";
-
-  v.style.position = "relative";
+      const v = document.getElementById("viewer");
 
 
-  /*
-    Create the fallback image.
-  */
+      v.innerHTML = "";
 
-  if (p.image) {
-
-    const fallback = document.createElement("img");
-
-    fallback.src = A + p.image;
-
-    fallback.alt = p.title;
-
-    fallback.style.cssText = `
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #e7e8e4;
-      z-index: 1;
-    `;
-
-    v.appendChild(fallback);
+      v.style.position = "relative";
 
 
-    /*
-      If there is a model, create the model viewer
-      on top of the image.
-    */
+      if (p.image) {
 
-    if (p.model) {
+        const fallback = document.createElement("img");
 
-      const mv = document.createElement("model-viewer");
+        fallback.src = A + p.image;
 
-      mv.setAttribute("src", p.model);
+        fallback.alt = p.title;
 
-      mv.setAttribute(
-        "alt",
-        p.title + " 3D model"
-      );
+        fallback.style.cssText = `
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          background: #e7e8e4;
+          z-index: 1;
+          border-radius: 16px;
+        `;
 
-      mv.setAttribute(
-        "camera-controls",
-        ""
-      );
-
-      mv.setAttribute(
-        "touch-action",
-        "pan-y"
-      );
-
-      mv.setAttribute(
-        "shadow-intensity",
-        "1"
-      );
-
-      mv.setAttribute(
-        "exposure",
-        "1"
-      );
-
-      mv.style.cssText = `
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 2;
-        background: transparent;
-      `;
+        v.appendChild(fallback);
 
 
-      /*
-        Don't show the model until it has
-        successfully loaded.
-      */
+        if (p.model) {
 
-      mv.style.visibility = "hidden";
+          const mv = document.createElement("model-viewer");
 
+          mv.setAttribute("src", p.model);
 
-      mv.addEventListener(
-        "load",
-        () => {
-
-          fallback.style.display = "none";
-
-          mv.style.visibility = "visible";
-
-
-          const n =
-            document.createElement("div");
-
-          n.className = "viewer-note";
-
-          n.textContent =
-            "Drag to rotate · Scroll to zoom";
-
-          v.appendChild(n);
-
-        }
-      );
-
-
-      /*
-        If the GLB fails, the fallback image
-        simply remains visible.
-      */
-
-      mv.addEventListener(
-        "error",
-        () => {
-
-          console.warn(
-            "Could not load 3D model:",
-            p.model
+          mv.setAttribute(
+            "alt",
+            p.title + " 3D model"
           );
 
-          mv.remove();
+          mv.setAttribute(
+            "camera-controls",
+            ""
+          );
+
+          mv.setAttribute(
+            "touch-action",
+            "pan-y"
+          );
+
+          mv.setAttribute(
+            "shadow-intensity",
+            "1"
+          );
+
+          mv.setAttribute(
+            "exposure",
+            "1"
+          );
+
+          mv.style.cssText = `
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: transparent;
+            border-radius: 16px;
+          `;
+
+
+          mv.style.visibility = "hidden";
+
+
+          mv.addEventListener(
+            "load",
+            () => {
+
+              fallback.style.display = "none";
+
+              mv.style.visibility = "visible";
+
+
+              const n =
+                document.createElement("div");
+
+              n.className = "viewer-note";
+
+              n.textContent =
+                "Drag to rotate · Scroll to zoom";
+
+              v.appendChild(n);
+
+            }
+          );
+
+
+          mv.addEventListener(
+            "error",
+            () => {
+
+              console.warn(
+                "Could not load 3D model:",
+                p.model
+              );
+
+              mv.remove();
+
+            }
+          );
+
+
+          v.appendChild(mv);
 
         }
-      );
 
+      } else {
 
-      v.appendChild(mv);
+        if (p.model) {
 
-    }
+          const mv = document.createElement("model-viewer");
 
-  } else {
+          mv.setAttribute("src", p.model);
 
-    /*
-      No image exists.
-    */
+          mv.setAttribute(
+            "alt",
+            p.title + " 3D model"
+          );
 
-    if (p.model) {
+          mv.setAttribute(
+            "camera-controls",
+            ""
+          );
 
-      const mv = document.createElement("model-viewer");
+          mv.setAttribute(
+            "touch-action",
+            "pan-y"
+          );
 
-      mv.setAttribute("src", p.model);
+          mv.setAttribute(
+            "shadow-intensity",
+            "1"
+          );
 
-      mv.setAttribute(
-        "alt",
-        p.title + " 3D model"
-      );
+          mv.setAttribute(
+            "exposure",
+            "1"
+          );
 
-      mv.setAttribute(
-        "camera-controls",
-        ""
-      );
+          mv.style.cssText = `
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+          `;
 
-      mv.setAttribute(
-        "touch-action",
-        "pan-y"
-      );
+          mv.addEventListener(
+            "load",
+            () => {
 
-      mv.setAttribute(
-        "shadow-intensity",
-        "1"
-      );
+              const n =
+                document.createElement("div");
 
-      mv.setAttribute(
-        "exposure",
-        "1"
-      );
+              n.className = "viewer-note";
 
-      mv.style.cssText = `
-        width: 100%;
-        height: 100%;
-      `;
+              n.textContent =
+                "Drag to rotate · Scroll to zoom";
 
-      mv.addEventListener(
-        "load",
-        () => {
+              v.appendChild(n);
 
-          const n =
-            document.createElement("div");
+            }
+          );
 
-          n.className = "viewer-note";
+          mv.addEventListener(
+            "error",
+            () => {
 
-          n.textContent =
-            "Drag to rotate · Scroll to zoom";
+              v.innerHTML = `
+                <div class="model-missing">
+                  <div>
+                    <b>3D model unavailable</b>
+                    No public image or working 3D model is available.
+                  </div>
+                </div>
+              `;
 
-          v.appendChild(n);
+            }
+          );
 
-        }
-      );
+          v.appendChild(mv);
 
-      mv.addEventListener(
-        "error",
-        () => {
+        } else {
 
           v.innerHTML = `
             <div class="model-missing">
               <div>
-                <b>3D model unavailable</b>
-                No public image or working 3D model is available.
+                <b>No public image available</b>
+                NDA / no public documentation
               </div>
             </div>
           `;
 
         }
-      );
 
-      v.appendChild(mv);
+      }
 
-    } else {
 
-      v.innerHTML = `
-        <div class="model-missing">
-          <div>
-            <b>No public image available</b>
-            NDA / no public documentation
-          </div>
-        </div>
-      `;
+      document
+        .getElementById("modal")
+        .classList.add("open");
 
+      document.body.style.overflow = "hidden";
     }
-
-  }
-
-
-  /*
-    Open modal.
-  */
-
-  document
-    .getElementById("modal")
-    .classList.add("open");
-
-  document.body.style.overflow = "hidden";
-}
 
 
     /* =========================================================
@@ -2163,3 +2090,4 @@ function openProject(id) {
 
 </body>
 </html>
+```
