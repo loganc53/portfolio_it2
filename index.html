@@ -12,8 +12,6 @@
     content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, manufacturing, and vehicle projects."
   >
 
-  <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
-
   <script type="importmap">
     {
       "imports": {
@@ -1858,24 +1856,24 @@
       };
 
       const loadStepViewer = async (url, title) => {
-        const [THREE, { OrbitControls }] = await Promise.all([
+        const [threeModule, controlsModule, occtModule] = await Promise.all([
           import("three"),
-          import("three/addons/controls/OrbitControls.js")
+          import("three/addons/controls/OrbitControls.js"),
+          import("https://cdn.jsdelivr.net/npm/@sunbox/occt-import-js@0.0.29/dist/occt-import-js.js")
         ]);
 
-        if (typeof window.occtimportjs !== "function") {
-          throw new Error("STEP engine failed to initialize.");
-        }
-
-        const occt = await window.occtimportjs();
+        const THREE = threeModule;
+        const { OrbitControls } = controlsModule;
+        const occtFactory = occtModule.default || occtModule;
+        const occt = await occtFactory();
 
         const response = await fetch(url);
         if (!response.ok) throw new Error(`STEP request failed: ${response.status}`);
         const buffer = await response.arrayBuffer();
         const result = occt.ReadStepFile(new Uint8Array(buffer), null);
 
-        if (!result || !result.success || !result.meshes?.length) {
-          throw new Error("The STEP file contained no renderable geometry.");
+        if (!result || !result.success || !Array.isArray(result.meshes) || result.meshes.length === 0) {
+          throw new Error(result?.error || "The STEP file contained no renderable geometry.");
         }
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
