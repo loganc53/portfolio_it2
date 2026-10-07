@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 
 <html lang="en">
@@ -13,9 +12,13 @@
     content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, manufacturing, and vehicle projects."
   >
 
-  <script
-    type="module"
-    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+      }
+    }
   </script>
 
   <style>
@@ -417,16 +420,12 @@
       min-height: 460px;
     }
 
-    .project-media img {
+    .project-media img,
+    .project-media.contain img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      border-radius: 0;
-    }
-    
-    .project-media.contain img {
-      object-fit: cover;
       padding: 0;
       border-radius: 0;
     }
@@ -725,16 +724,17 @@
       border-radius: 16px;
     }
 
-    model-viewer {
+    .step-viewer-canvas {
+      display: block;
       width: 100%;
       height: 100%;
-
       background:
         linear-gradient(
           135deg,
           #ecece8,
           #dfe1dd
         );
+      border-radius: 16px;
     }
 
     .viewer-note {
@@ -1331,7 +1331,7 @@
         gallery: [
           "monocad.png"
         ],
-        model: "monocoque.glb",
+        model: "monocoque.step",
 
         overview:
           "Preliminary design of a half-monocoque to prove the feasibility of switching to a half-monocoque chassis for the 2027 season.",
@@ -1402,7 +1402,7 @@
           "p18_1.jpeg",
           "p19_1.jpeg"
         ],
-        model: "models/optilayupos.glb",
+        model: "models/optilayupos.step",
 
         overview:
           "MATLAB code for optimizing enclosed carbon-fiber components with obscure shapes using estimated moment of inertia, primarily to estimate airfoil layups before validation in AnsysACP.",
@@ -1432,7 +1432,7 @@
         gallery: [
           "p19_1.jpeg"
         ],
-        model: "models/gearbox-optimization.glb",
+        model: "models/gearbox-optimization.step",
 
         overview:
           "Analysis of gear ratios using a previously coded acceleration simulation.",
@@ -1456,7 +1456,7 @@
         cats: ["cad"],
         image: null,
         gallery: [],
-        model: "models/hunter-prototype.glb",
+        model: "models/hunter-prototype.step",
 
         overview:
           "An NDA-limited project. A fully functional product prototype was independently designed from an initial rough sketch from a superior.",
@@ -1481,7 +1481,7 @@
         gallery: [
           "p21_1.jpeg"
         ],
-        model: "models/trailer-hitch-mounts.glb",
+        model: "models/trailer-hitch-mounts.step",
 
         overview:
           "A trailer hitch mount requested by a senior engineer to facilitate maneuvering a 2-ton rolling chassis with a forklift.",
@@ -1511,7 +1511,7 @@
         gallery: [
           "p22_1.jpeg"
         ],
-        model: "models/gimbal-test-stand.glb",
+        model: "models/gimbal-test-stand.step",
 
         overview:
           "A gimbal test stand intended to facilitate debugging for software engineers. Details are limited by NDA.",
@@ -1537,7 +1537,7 @@
         cats: ["cad"],
         image: null,
         gallery: [],
-        model: "models/gear-rack-test-stand.glb",
+        model: "models/gear-rack-test-stand.step",
 
         overview:
           "A stand to test the ultimate strength of a plastic rack and pinion. Details are limited by NDA.",
@@ -1561,7 +1561,7 @@
         gallery: [
           "p24_1.jpeg"
         ],
-        model: "CO_27_wheel_asm_it3_6_2_barrels.glb",
+        model: "CO_27_wheel_asm_it3_6_2_barrels.step",
 
         overview:
           "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
@@ -1582,7 +1582,7 @@
         cats: ["cad"],
         image: null,
         gallery: [],
-        model: "models/2008-subaru-legacy.glb",
+        model: "models/2008-subaru-legacy.step",
 
         overview:
           "General mechanical assembly and repair experience on a 2008 Subaru Legacy.",
@@ -1605,7 +1605,7 @@
         cats: ["cad"],
         image: null,
         gallery: [],
-        model: "models/2008-subaru-legacy-specb.glb",
+        model: "models/2008-subaru-legacy-specb.step",
 
         overview:
           "General mechanical assembly and repair experience on a 2008 Subaru Legacy spec.B.",
@@ -1841,208 +1841,188 @@
 
       const v = document.getElementById("viewer");
 
-
       v.innerHTML = "";
-
       v.style.position = "relative";
 
+      const showMissing = (message = "STEP model unavailable") => {
+        v.innerHTML = `
+          <div class="model-missing">
+            <div>
+              <b>${message}</b>
+              No public STEP model could be loaded.
+            </div>
+          </div>
+        `;
+      };
+
+      const loadStepViewer = async (url, title) => {
+        const [{ default: OCCTLoader }, THREE, { OrbitControls }] = await Promise.all([
+          import("https://cdn.jsdelivr.net/npm/occt-import-js@0.0.12/dist/occt-import-js.js"),
+          import("three"),
+          import("three/addons/controls/OrbitControls.js")
+        ]);
+
+        const occt = await OCCTLoader({
+          locateFile: (name) =>
+            `https://cdn.jsdelivr.net/npm/occt-import-js@0.0.12/dist/${name}`
+        });
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`STEP request failed: ${response.status}`);
+        const buffer = await response.arrayBuffer();
+        const result = occt.ReadStepFile(new Uint8Array(buffer), null);
+
+        if (!result || !result.success || !result.meshes?.length) {
+          throw new Error("The STEP file contained no renderable geometry.");
+        }
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(v.clientWidth, v.clientHeight, false);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.domElement.className = "step-viewer-canvas";
+        renderer.domElement.setAttribute("aria-label", `${title} STEP model viewer`);
+        v.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xe7e8e4);
+
+        const camera = new THREE.PerspectiveCamera(
+          45,
+          Math.max(v.clientWidth, 1) / Math.max(v.clientHeight, 1),
+          0.01,
+          100000
+        );
+        camera.position.set(3, 3, 3);
+
+        scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8a86, 2.2));
+        const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        keyLight.position.set(5, 8, 6);
+        scene.add(keyLight);
+        const fillLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        fillLight.position.set(-5, 3, -4);
+        scene.add(fillLight);
+
+        const root = new THREE.Group();
+        scene.add(root);
+
+        for (const meshData of result.meshes) {
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(meshData.attributes.position.array, 3)
+          );
+
+          if (meshData.attributes.normal?.array) {
+            geometry.setAttribute(
+              "normal",
+              new THREE.Float32BufferAttribute(meshData.attributes.normal.array, 3)
+            );
+          } else {
+            geometry.computeVertexNormals();
+          }
+
+          if (meshData.index?.array) {
+            geometry.setIndex(Array.from(meshData.index.array));
+          }
+
+          const color = meshData.color
+            ? new THREE.Color(meshData.color[0], meshData.color[1], meshData.color[2])
+            : new THREE.Color(0x8f9590);
+
+          const material = new THREE.MeshStandardMaterial({
+            color,
+            metalness: 0.15,
+            roughness: 0.58,
+            side: THREE.DoubleSide
+          });
+
+          root.add(new THREE.Mesh(geometry, material));
+        }
+
+        const box = new THREE.Box3().setFromObject(root);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        root.position.sub(center);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.07;
+        controls.target.set(0, 0, 0);
+
+        const distance = maxDim * 2.2;
+        camera.position.set(distance, distance * 0.8, distance);
+        camera.lookAt(0, 0, 0);
+        camera.near = Math.max(maxDim / 10000, 0.001);
+        camera.far = maxDim * 100;
+        camera.updateProjectionMatrix();
+        controls.minDistance = maxDim * 0.15;
+        controls.maxDistance = maxDim * 20;
+        controls.update();
+
+        const resize = () => {
+          const width = Math.max(v.clientWidth, 1);
+          const height = Math.max(v.clientHeight, 1);
+          renderer.setSize(width, height, false);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+        };
+        const observer = new ResizeObserver(resize);
+        observer.observe(v);
+
+        let frame;
+        const animate = () => {
+          frame = requestAnimationFrame(animate);
+          controls.update();
+          renderer.render(scene, camera);
+        };
+        animate();
+
+        const n = document.createElement("div");
+        n.className = "viewer-note";
+        n.textContent = "Drag to rotate · Scroll to zoom";
+        v.appendChild(n);
+      };
 
       if (p.image) {
-
         const fallback = document.createElement("img");
-
         fallback.src = A + p.image;
-
         fallback.alt = p.title;
-
         fallback.style.cssText = `
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
           background: #e7e8e4;
           z-index: 1;
           border-radius: 16px;
         `;
-
         v.appendChild(fallback);
 
-
         if (p.model) {
-
-          const mv = document.createElement("model-viewer");
-
-          mv.setAttribute("src", p.model);
-
-          mv.setAttribute(
-            "alt",
-            p.title + " 3D model"
-          );
-
-          mv.setAttribute(
-            "camera-controls",
-            ""
-          );
-
-          mv.setAttribute(
-            "touch-action",
-            "pan-y"
-          );
-
-          mv.setAttribute(
-            "shadow-intensity",
-            "1"
-          );
-
-          mv.setAttribute(
-            "exposure",
-            "1"
-          );
-
-          mv.style.cssText = `
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            background: transparent;
-            border-radius: 16px;
-          `;
-
-
-          mv.style.visibility = "hidden";
-
-
-          mv.addEventListener(
-            "load",
-            () => {
-
-              fallback.style.display = "none";
-
-              mv.style.visibility = "visible";
-
-
-              const n =
-                document.createElement("div");
-
-              n.className = "viewer-note";
-
-              n.textContent =
-                "Drag to rotate · Scroll to zoom";
-
-              v.appendChild(n);
-
-            }
-          );
-
-
-          mv.addEventListener(
-            "error",
-            () => {
-
-              console.warn(
-                "Could not load 3D model:",
-                p.model
-              );
-
-              mv.remove();
-
-            }
-          );
-
-
-          v.appendChild(mv);
-
+          loadStepViewer(A + p.model, p.title)
+            .then(() => { fallback.style.display = "none"; })
+            .catch((error) => {
+              console.warn("Could not load STEP model:", p.model, error);
+            });
         }
-
+      } else if (p.model) {
+        loadStepViewer(A + p.model, p.title)
+          .catch((error) => {
+            console.warn("Could not load STEP model:", p.model, error);
+            showMissing();
+          });
       } else {
-
-        if (p.model) {
-
-          const mv = document.createElement("model-viewer");
-
-          mv.setAttribute("src", p.model);
-
-          mv.setAttribute(
-            "alt",
-            p.title + " 3D model"
-          );
-
-          mv.setAttribute(
-            "camera-controls",
-            ""
-          );
-
-          mv.setAttribute(
-            "touch-action",
-            "pan-y"
-          );
-
-          mv.setAttribute(
-            "shadow-intensity",
-            "1"
-          );
-
-          mv.setAttribute(
-            "exposure",
-            "1"
-          );
-
-          mv.style.cssText = `
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-          `;
-
-          mv.addEventListener(
-            "load",
-            () => {
-
-              const n =
-                document.createElement("div");
-
-              n.className = "viewer-note";
-
-              n.textContent =
-                "Drag to rotate · Scroll to zoom";
-
-              v.appendChild(n);
-
-            }
-          );
-
-          mv.addEventListener(
-            "error",
-            () => {
-
-              v.innerHTML = `
-                <div class="model-missing">
-                  <div>
-                    <b>3D model unavailable</b>
-                    No public image or working 3D model is available.
-                  </div>
-                </div>
-              `;
-
-            }
-          );
-
-          v.appendChild(mv);
-
-        } else {
-
-          v.innerHTML = `
-            <div class="model-missing">
-              <div>
-                <b>No public image available</b>
-                NDA / no public documentation
-              </div>
+        v.innerHTML = `
+          <div class="model-missing">
+            <div>
+              <b>No public image available</b>
+              NDA / no public documentation
             </div>
-          `;
-
-        }
-
+          </div>
+        `;
       }
 
 
@@ -2087,4 +2067,3 @@
 
 </body>
 </html>
-```
