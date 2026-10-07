@@ -12,6 +12,8 @@
     content="Mechanical engineering portfolio — CAD, composites, FSAE, analysis, manufacturing, and vehicle projects."
   >
 
+  <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
+
   <script type="importmap">
     {
       "imports": {
@@ -1432,7 +1434,7 @@
         gallery: [
           "p19_1.jpeg"
         ],
-        model: "26_fw_e3_mold_design_test.STEP",
+        model: "models/gearbox-optimization.step",
 
         overview:
           "Analysis of gear ratios using a previously coded acceleration simulation.",
@@ -1856,16 +1858,16 @@
       };
 
       const loadStepViewer = async (url, title) => {
-        const [{ default: OCCTLoader }, THREE, { OrbitControls }] = await Promise.all([
-          import("https://cdn.jsdelivr.net/npm/occt-import-js@0.0.12/dist/occt-import-js.js"),
+        const [THREE, { OrbitControls }] = await Promise.all([
           import("three"),
           import("three/addons/controls/OrbitControls.js")
         ]);
 
-        const occt = await OCCTLoader({
-          locateFile: (name) =>
-            `https://cdn.jsdelivr.net/npm/occt-import-js@0.0.12/dist/${name}`
-        });
+        if (typeof window.occtimportjs !== "function") {
+          throw new Error("STEP engine failed to initialize.");
+        }
+
+        const occt = await window.occtimportjs();
 
         const response = await fetch(url);
         if (!response.ok) throw new Error(`STEP request failed: ${response.status}`);
