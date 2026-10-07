@@ -1792,7 +1792,7 @@
       });
 
 
-    /* =========================================================
+ /* =========================================================
        OPEN PROJECT
        ========================================================= */
 
@@ -1841,6 +1841,7 @@
 
       const v = document.getElementById("viewer");
 
+      v.style.display = "block";
       v.innerHTML = "";
       v.style.position = "relative";
 
@@ -1985,44 +1986,45 @@
         v.appendChild(n);
       };
 
-      if (p.image) {
-        const fallback = document.createElement("img");
-        fallback.src = A + p.image;
-        fallback.alt = p.title;
-        fallback.style.cssText = `
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          background: #e7e8e4;
-          z-index: 1;
-          border-radius: 16px;
-        `;
-        v.appendChild(fallback);
+      if (p.model) {
+        if (p.image) {
+          const fallback = document.createElement("img");
+          fallback.src = A + p.image;
+          fallback.alt = p.title;
+          fallback.style.cssText = `
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #e7e8e4;
+            z-index: 1;
+            border-radius: 16px;
+          `;
+          v.appendChild(fallback);
 
-        if (p.model) {
           loadStepViewer(A + p.model, p.title)
             .then(() => { fallback.style.display = "none"; })
             .catch((error) => {
               console.warn("Could not load STEP model:", p.model, error);
+              fallback.style.display = "none";
+              showMissing("STEP model unavailable");
+            });
+        } else {
+          loadStepViewer(A + p.model, p.title)
+            .catch((error) => {
+              console.warn("Could not load STEP model:", p.model, error);
+              showMissing();
             });
         }
-      } else if (p.model) {
-        loadStepViewer(A + p.model, p.title)
-          .catch((error) => {
-            console.warn("Could not load STEP model:", p.model, error);
-            showMissing();
-          });
       } else {
-        v.innerHTML = `
-          <div class="model-missing">
-            <div>
-              <b>No public image available</b>
-              NDA / no public documentation
-            </div>
-          </div>
-        `;
+        // No STEP model: remove the large model viewer from the modal.
+        // The project's photos remain in the documentation gallery below.
+        v.style.display = "none";
+      }
+
+      if (p.model) {
+        v.style.display = "block";
       }
 
 
