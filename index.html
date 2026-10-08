@@ -1335,7 +1335,7 @@
         gallery: [
           "monocad.png"
         ],
-        model: "monocoque.STEP",
+        model: "27_CH_Monocoque.STEP",
 
         overview:
           "Preliminary design of a half-monocoque to prove the feasibility of switching to a half-monocoque chassis for the 2027 season.",
@@ -1363,15 +1363,12 @@
         title: "Carbon Fiber Panel Sizing Solver — optiLayup",
         kicker: "FSAE · 49ers Racing IC",
         cats: ["FSAE", "25", "software"],
-        image: "p12_1.jpeg",
+        image: "optilayup1.png",
         gallery: [
-          "p12_1.jpeg",
-          "p12_2.jpeg",
-          "p13_1.jpeg",
-          "p13_2.jpeg",
-          "p14_1.jpeg",
-          "p14_2.jpeg",
-          "p15_1.jpeg"
+          "optilayup1.png",
+          "optilayup2.png",
+          "optilayup3.png",
+          "optilayup4.png"
         ],
 
         overview:
@@ -1399,12 +1396,11 @@
       optilayupos: {
         title: "Obscure Shape Carbon Fiber Layup Optimizer — optiLayupOS",
         kicker: "FSAE · 49ers Racing IC",
-        cats: ["fsae", "composites", "software"],
-        image: "p17_1.jpeg",
+        cats: ["FSAE", "25", "software"],
+        image: "optilayupos1.png",
         gallery: [
-          "p17_1.jpeg",
-          "p18_1.jpeg",
-          "p19_1.jpeg"
+          "optilayupos1.png",
+          "optilayupos2.png"
         ],
 
         overview:
@@ -1430,10 +1426,10 @@
       acceleration: {
         title: "Gearbox Ratio Optimization / Acceleration Simulation",
         kicker: "FSAE · 49ers Racing IC",
-        cats: ["fsae", "software"],
-        image: "p19_1.jpeg",
+        cats: ["FSAE", "software", "25"],
+        image: "gearboxopti.png",
         gallery: [
-          "p19_1.jpeg"
+          "gearboxopti.png"
         ],
 
         overview:
@@ -1455,7 +1451,7 @@
       hunterPrototype: {
         title: "Rough Functional Prototype",
         kicker: "Hunter Engineering Company",
-        cats: ["cad"],
+        cats: ["24"],
         image: null,
         gallery: [],
 
@@ -1477,10 +1473,10 @@
       hitch: {
         title: "Trailer Hitch Mounts for Rolling Chassis",
         kicker: "Hunter Engineering Company",
-        cats: ["cad"],
-        image: "p21_1.jpeg",
+        cats: ["24"],
+        image: "trailerhitch.png",
         gallery: [
-          "p21_1.jpeg"
+          "trailerhitch.png"
         ],
 
         overview:
@@ -1506,10 +1502,10 @@
       gimbal: {
         title: "Gimbal Test Stand",
         kicker: "Hunter Engineering Company",
-        cats: ["cad"],
-        image: "p22_1.jpeg",
+        cats: ["24"],
+        image: "gimbalstands.png",
         gallery: [
-          "p22_1.jpeg"
+          "gimbalstands.png"
         ],
 
         overview:
@@ -1533,7 +1529,7 @@
       rack: {
         title: "Gear Rack Strength Testing Stand",
         kicker: "Hunter Engineering Company",
-        cats: ["cad"],
+        cats: ["24"],
         image: null,
         gallery: [],
 
@@ -1554,12 +1550,12 @@
       trailer: {
         title: "Trailer Model",
         kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
+        cats: ["3dm", "25", "personal"],
+        image: "trailer.png",
         gallery: [
-          "p24_1.jpeg"
+          "trailer.png"
         ],
-        model: "trailer.step",
+        model: "trailer.STEP",
 
         overview:
           "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
@@ -1577,11 +1573,13 @@
         title: "Composite Shock Bar",
         kicker: "FSAE · 49ers Racing IC",
         cats: ["cad", "FSAE", "25"],
-        image: "p24_1.jpeg",
+        image: "Screenshot 2026-01-14 001442.png",
         gallery: [
-          "p24_1.jpeg"
+          "Screenshot 2026-01-14 001442.png",
+          "Screenshot 2026-01-20 121443.png",
+          "Screenshot 2026-01-20 122814.png"
         ],
-        model: "shockbar.step",
+        model: "26_CO_rear_shock_bar_asm.STEP",
 
         overview:
           "An aluminum-reinforced carbon fiber rear shock bar for the 2026 49ers Racing ",
@@ -1597,254 +1595,203 @@
       },
 
       compositewheelbarrels: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
+        title: "Composite Wheel Barrels",
+        kicker: "FSAE · 49ers Racing IC",
+        cats: ["3dm", "FSAE", "26"],
+        image: "Screenshot 2026-06-04 210134.png",
         gallery: [
-          "p24_1.jpeg"
+          "Screenshot 2026-06-04 210134.png",
+          "Screenshot 2026-07-31 020648.png"
         ],
-        model: "wheelbarrels.step",
+        model: "wheelbarrels.stp",
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "First design of carbon fiber wheel barrels in 49ers Racing history since ~2013.",
 
-        analysis: [],
+        analysis: ["Performing significant analysis both in ANSYS and in terms of manufacturing. Elsewise, details able to be shared are limited."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Used standard wheel profile and modified slightly for composite design principles.",
+          "Currently analyzing all possible load cases to ensure proper stiffness and strength.",
+          "Measured internal wheel barrel temperature in mock-endurance stint to determine necessary epoxy glass transition temperature."
         ],
 
-        result: []
+        result: ["Still in progress."]
       },
 
       compositesteeringwheel: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
-        model: "steeringwheel.step",
+        title: "Composite Steering Wheel Layup",
+        kicker: "FSAE · 49ers Racing IC",
+        cats: [ "26", "FSAE"],
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Performed analysis to determine layup for 2027 Hollow Carbon Steering Wheel. No photos are able to be shared as this is a significant R&D project for the team.",
 
-        analysis: [],
+        analysis: ["Performed ANSYS ACP simulations with quick disconnect, carbon fiber wheel, and stiffening insert."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Designed stiffening insert to improve moment of inertia for bending; reduced initial estimated weight by 0.2 pounds."
         ],
 
-        result: []
+        result: ["Still in progress."]
       },
       carbonmolds: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
+        title: "Carbon Fiber Air Foil Molds",
+        kicker: "FSAE · 49ers Racing IC",
+        cats: [ "FSAE", "26", "3dm"],
+        image: "Screenshot 2026-09-23 202053.png",
         gallery: [
-          "p24_1.jpeg"
+          "Screenshot 2026-09-23 202053.png",
+          "Screenshot 2026-09-23 202247.png"
         ],
-        model: "mold.step",
+        model: "26_fwe3_top_half.stp",
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Designed prototype mold of 2026 Front Wing 3rd Element to develop carbon fiber mold design and manufacturing process.",
 
-        analysis: [],
+        analysis: ["Ensured proper draft angles and parting line; also made allowances for laminate thickness."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Modeled in Creo based from air foil."
         ],
 
-        result: []
+        result: ["The molds came out very well, especially for the first time attempting this process in the team's history. Need to remove positive 'nubs' for the next attempt and replace with divots such that the molds can be post drilled."]
       },
       robot: {
-        title: "Trailer Model",
+        title: "4 DoF Robot",
         kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
+        cats: ["personal", "26", "3dm"],
+        image: "Screenshot 2026-08-27 151308.png",
         gallery: [
-          "p24_1.jpeg"
+          "Screenshot 2026-08-27 151308.png"
         ],
-        model: "robot.step",
+        model: "jd_mini_ra_asm.stp",
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Miniature version of school project that I had designed both for my own curiousity and to develop code to use in the real project.",
 
         analysis: [],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Designed custom 3D printed gears in CAD using involute curve.",
+          "Intended to be entirely 3D printed, so snap-fit arm mounting was employed."
         ],
 
-        result: []
+        result: ["Worked relatively well; needed stronger motor for the primary vertical axis."]
       },
       skatesprocket: {
-        title: "Trailer Model",
+        title: "Skateboard Sprocket",
         kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
+        cats: ["pesonal", "25", "3dm"],
+        image: "Screenshot 2026-01-20 223844.png",
         gallery: [
-          "p24_1.jpeg"
+          "Screenshot 2026-01-20 223844.png"
         ],
-        model: "sprocket.step",
+        model: "onsra_small_sprocket.stp",
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "3D printed sprocket for an electric skateboard.",
 
-        analysis: [],
-
-        design: [
-          "Modeled the trailer as a compact visual asset."
-        ],
-
-        result: []
-      },
-
-      starship: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
-        model: "starship.step",
-
-        overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
-
-        analysis: [],
+        analysis: ["Performed basic torque and shear stress calculations to ensure that the pins would not fail."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Reverse-engineered the general profile of the overall sprocket and then created a custom 36-tooth profile based on the belt standard."
         ],
 
-        result: []
+        result: ["Performed successfully and achieved a new top speed for the board of 29MPH from 25MPH (goal was 30MPH, unfortunately motors did were not powerful enough and I was limited from creating an even smaller gear by belt availability."]
       },
+
       rnr: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
+        title: "Booster 19 Test Article Remove and Repair",
+        kicker: "SpaceX",
+        cats: ["spacex", "26"],
+        image: null,
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Designed repair component and wrote work instructions for remove and repair operation on Booster 19 Flight Qualification Article.",
 
-        analysis: [],
 
-        design: [
-          "Modeled the trailer as a compact visual asset."
-        ],
-
-        result: []
+        result: ["Minimized downtime and worked with technicians to perform repair in just one weekend."]
       },
       mirrormount: {
-        title: "Trailer Model",
+        title: "Motorcycle Mirror Mount",
         kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
+        cats: ["cad", "personal", "26"],
+        image: "mirror.jpeg",
         gallery: [
-          "p24_1.jpeg"
+          "mirror.jpg"
         ],
-        model: "xsrmirrormount.step",
+        model: "xsr700_barendmirrormountv2.stp",
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Custom 3D printed bar end mirror mounts for my 2021 Yamaha XSR700",
 
-        analysis: [],
+        analysis: ["Performed very basic aerodynamic analysis of the drag force on the mirror to determine strength required; targeted 135MPH (top speed + 15MPH wind).",
+                  "Ensured filament choice would hold up to North Carolina heat."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Designed for press fit onto existing bar ends and iterated twice to achieve fit; also created 'nub' based on mirrors' major diameter so that the mirrors could be threaded on and tap the nubs to create the thread profile."
         ],
 
-        result: []
+        result: ["Writing this approximately 5 months after I designed and installed them, they have survived many hot days and many rides on the highway at legal speeds + 40MPH wind.",
+                "Unfortunately, one of the mirrors mount threads became loose as the right mirror was mounted such that the drag made the mirror start to unthread itself."]
       },
       argon: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
+        title: "Argon Backpurge for V3 Booster Oxygen Landing Tank",
+        kicker: "SpaceX",
+        cats: ["spacex", "26"],
+        image: null,
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Designed argon backpurge tooling to constrain and minimize root gap on two components of oxygen landing tank as well as reduced possibility of sugaring via argon flow.",
 
-        analysis: [],
+        analysis: ["Performed first-order fluid calculations to ensure proper argon flow to weld area while staying within factory argon supply limitations."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Modeled CNC milled component in Siemens NX with DFM practices and GD&T geometric tolerances defined."
         ],
-
-        result: []
       },
       argoncalc: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
+        title: "Argon Backpurge Excel Calculator",
+        kicker: "SpaceX",
+        cats: ["spacex", "26"],
+        image: null,
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "While designing oxygen landing tank backpurge, developed first-order fluid calculation Excel tool for those designing future argon backpurges.",
 
-        analysis: [],
-
-        design: [
-          "Modeled the trailer as a compact visual asset."
-        ],
-
-        result: []
+        analysis: ["Performed validation via comparison to pressure/flow figures in argon purge system that I had re-plumbed."],
       },
 
       build: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
+        title: "V3 Booster Qualification Article Build",
+        kicker: "SpaceX",
+        cats: ["spacex", "26"],
+        image: null,
+
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Wrote build instructions and supervised assembly of V3 booster Thrust Vector Control Actuator test article.",
 
-        analysis: [],
 
-        design: [
-          "Modeled the trailer as a compact visual asset."
-        ],
-
-        result: []
+        result: ["Article successfully tested new component in cryogenic loading scenario in Hawthorne, CA."]
       },
 
       base: {
-        title: "Trailer Model",
-        kicker: "Personal Project",
-        cats: ["cad"],
-        image: "p24_1.jpeg",
-        gallery: [
-          "p24_1.jpeg"
-        ],
+        title: "Jib Crane Foundationless Baseplates",
+        kicker: "SpaceX",
+        cats: ["spacex", "26"],
+        image: null,
 
         overview:
-          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+          "Designed and oversaw installation of foundationless baseplates for factory operations.",
 
-        analysis: [],
+        analysis: ["Ensured proper baseplate stiffness, proper concrete anchor pullout strength, and proper threaded fastener torque and strength."],
 
         design: [
-          "Modeled the trailer as a compact visual asset."
+          "Modeled and geometrically toleranced component in Siemens NX."
         ],
 
-        result: []
+        result: ["Eliminating the need to pour a foundation prevented 3+ days of downtime."]
       }
     };
 
