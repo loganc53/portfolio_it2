@@ -1064,6 +1064,10 @@
             Analysis / Software
           </button>
 
+          <button class="filter" data-filter="personal">
+            Personal Projects
+          </button>
+
           <button class="filter" data-filter="26">
             2026 Projects
           </button>
@@ -1318,7 +1322,7 @@
         design: [],
 
         result: [
-          "CAD is no longer available; the portfolio contains the remaining screenshot documentation."
+          "Successfully constrained electronic components during 2024 competition."
         ]
       },
 
@@ -1331,7 +1335,7 @@
         gallery: [
           "monocad.png"
         ],
-        model: "26_fw_e3_mold_design_test.STEP",
+        model: "monocoque.STEP",
 
         overview:
           "Preliminary design of a half-monocoque to prove the feasibility of switching to a half-monocoque chassis for the 2027 season.",
@@ -1376,18 +1380,18 @@
         analysis: [
           "Generates possible combinations of 0, ±45, and 90 degree plies and core options.",
           "Eliminates layups based on DFM, bend-bend coupling, ply wrapping, core adjacency, safety factor, and maximum-deflection requirements.",
-          "Returns the lightest, highest-safety-factor, least-stressed, least-deflecting, and best-combination layups.",
           "Supports bending about all axes plus point and distributed loads."
         ],
 
         design: [
           "Separated ABCD and abcd calculations because 6×6 matrix inversion was computationally expensive.",
           "Performed cheaper feasibility checks before abcd calculations and optimized the ABCD calculator.",
-          "Runtime improved from roughly 366,000 layups/s to approximately 6,000,000 layups/s."
+          
         ],
 
         result: [
-          "This was approximately the eighth MATLAB function written and the first at this level of complexity. The final implementation was about 600 hand-coded and hand-troubleshot lines."
+          "Returns the lightest, highest-safety-factor, least-stressed, least-deflecting, and best-combination layups.",
+          "Runtime improved from roughly 366,000 layups/s to approximately 6,000,000 layups/s."
         ]
       },
 
@@ -1402,7 +1406,6 @@
           "p18_1.jpeg",
           "p19_1.jpeg"
         ],
-        model: "models/optilayupos.step",
 
         overview:
           "MATLAB code for optimizing enclosed carbon-fiber components with obscure shapes using estimated moment of inertia, primarily to estimate airfoil layups before validation in AnsysACP.",
@@ -1432,7 +1435,6 @@
         gallery: [
           "p19_1.jpeg"
         ],
-        model: "models/gearbox-optimization.step",
 
         overview:
           "Analysis of gear ratios using a previously coded acceleration simulation.",
@@ -1456,7 +1458,6 @@
         cats: ["cad"],
         image: null,
         gallery: [],
-        model: "models/hunter-prototype.step",
 
         overview:
           "An NDA-limited project. A fully functional product prototype was independently designed from an initial rough sketch from a superior.",
@@ -1481,7 +1482,6 @@
         gallery: [
           "p21_1.jpeg"
         ],
-        model: "models/trailer-hitch-mounts.step",
 
         overview:
           "A trailer hitch mount requested by a senior engineer to facilitate maneuvering a 2-ton rolling chassis with a forklift.",
@@ -1511,7 +1511,6 @@
         gallery: [
           "p22_1.jpeg"
         ],
-        model: "models/gimbal-test-stand.step",
 
         overview:
           "A gimbal test stand intended to facilitate debugging for software engineers. Details are limited by NDA.",
@@ -1537,7 +1536,6 @@
         cats: ["cad"],
         image: null,
         gallery: [],
-        model: "models/gear-rack-test-stand.step",
 
         overview:
           "A stand to test the ultimate strength of a plastic rack and pinion. Details are limited by NDA.",
@@ -1561,7 +1559,7 @@
         gallery: [
           "p24_1.jpeg"
         ],
-        model: "CO_27_wheel_asm_it3_6_2_barrels.step",
+        model: "trailer.step",
 
         overview:
           "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
@@ -1575,55 +1573,281 @@
         result: []
       },
 
-
-      legacy: {
-        title: "2008 Subaru Legacy",
-        kicker: "Personal Project · Automotive",
-        cats: ["cad"],
-        image: null,
-        gallery: [],
-        model: "models/2008-subaru-legacy.step",
+      compositeshockbar: {
+        title: "Composite Shock Bar",
+        kicker: "FSAE · 49ers Racing IC",
+        cats: ["cad", "FSAE', "25"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "shockbar.step",
 
         overview:
-          "General mechanical assembly and repair experience on a 2008 Subaru Legacy.",
+          "An aluminum-reinforced carbon fiber rear shock bar for the 2026 49ers Racing ",
 
-        analysis: [
-          "Replaced wheel bearings, valve cover gaskets, steering knuckle, front lower ball joints, front sway-bar end-links, exhaust manifold, rear door-lock actuator, EGR valve, injector seals.",
-          "Diagnosed and repaired a clogged midpipe catalytic converter.",
-          "Performed multiple oil changes, replaced spark plugs and ignition coils, replaced the air filter, and replaced brake pads."
+        analysis: ["Performed analysis for initial ply schedule in self-developed layup optimizer.", 
+          "Performed ANSYS ACP simulation for maximum load case to determine structural needs."],
+
+        design: [
+          "Adjusted existing model for composite design practices."
         ],
 
-        design: [],
+        result: ["Unfortunately not implemented as I had left for SpaceX prior to manufacturing."]
+      },
+
+      compositewheelbarrels: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "wheelbarrels.step",
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
 
         result: []
       },
 
-
-      specb: {
-        title: "2008 Subaru Legacy spec.B",
-        kicker: "Personal Project · Automotive",
+      compositesteeringwheel: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
         cats: ["cad"],
-        image: null,
-        gallery: [],
-        model: "models/2008-subaru-legacy-specb.step",
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "steeringwheel.step",
 
         overview:
-          "General mechanical assembly and repair experience on a 2008 Subaru Legacy spec.B.",
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
 
-        analysis: [
-          "Diagnosed and replaced a faulty O2 sensor.",
-          "Replaced a seized rear brake caliper and bled the brake system.",
-          "Replaced a damaged charge pipe and thoroughly inspected the intake system for metal fragments."
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
         ],
 
-        design: [],
+        result: []
+      },
+      carbonmolds: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "mold.step",
 
-        result: [
-          "Performed multiple oil changes, cleaned the throttle body, and tightened boost couplers after one failed under boost."
-        ]
-      }
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
 
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+      robot: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "robot.step",
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+      skatesprocket: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "sprocket.step",
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+
+      starship: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "starship.step",
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+      rnr: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+      mirrormount: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+        model: "xsrmirrormount.step",
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+      argon: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+      argoncalc: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+
+      build: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
+
+      base: {
+        title: "Trailer Model",
+        kicker: "Personal Project",
+        cats: ["cad"],
+        image: "p24_1.jpeg",
+        gallery: [
+          "p24_1.jpeg"
+        ],
+
+        overview:
+          "A quick 3D model of the 49ers Racing gooseneck trailer made as a favor for a friend in Graphic Design.",
+
+        analysis: [],
+
+        design: [
+          "Modeled the trailer as a compact visual asset."
+        ],
+
+        result: []
+      },
     };
+
 
 
     /* =========================================================
@@ -1724,18 +1948,27 @@
        ========================================================= */
 
     const order = [
-      "brace",
-      "gearbox",
-      "jig",
-      "battery",
+      "argon",
+      "rnr",
+      "base",
+      "build",
+      "argoncalc",
+      "compositewheelbarrels",
+      "compositesteeringwheel",
+      "carbonmolds",
+      "robot",
+      "skatesprocket"
+      "starship",
       "monocoque",
       "optilayup",
       "optilayupos",
       "acceleration",
       "trailer",
-      "legacy",
-      "specb",
-      "rack"
+      "rack",
+      "brace",
+      "gearbox",
+      "jig",
+      "battery"
     ];
 
 
